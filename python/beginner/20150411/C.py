@@ -2,7 +2,7 @@
 
 def main():
     n = int(input())
-    a, b = map(int, input().split())
+    start, goal = map(lambda x: int(x) - 1, input().split())
     m = int(input())
     graph = [[0 for _ in range(n)] for _ in range(n)]
 
@@ -13,16 +13,16 @@ def main():
         graph[x][y] = 1
         graph[y][x] = 1
 
-    dijkstras(graph, a - 1, n, m)
+    dijkstras(graph, start, goal, n)
 
-def dijkstras(graph, start, goal, load_numbers):
+def dijkstras(graph, start, goal, n):
     max_cost = 200
-    cost = [max_cost for _ in range(goal)]
-    prev = [[] for _ in range(goal)]
-    visited = [False for _ in range(goal)]
+    cost = [max_cost for _ in range(n)]
+    path_count = [0 for _ in range(n)]
+    visited = [False for _ in range(n)]
 
     cost[start] = 0
-    prev[start].append(start)
+    path_count[start] = 1
     node = start
 
     while True:
@@ -30,21 +30,20 @@ def dijkstras(graph, start, goal, load_numbers):
         visited[node] = True
         next_node = -1
 
-        for i in range(goal):
+        for i in range(n):
             if visited[i] == True: continue
             if graph[node][i]:
                 d = cost[node] + graph[node][i]
                 if cost[i] >= d:
                     cost[i] = d
-                    prev[i].append(node)
+                    path_count[i] += path_count[node]
             if min_cost > cost[i]:
                 min_cost = cost[i]
                 next_node = i
         node = next_node
         if next_node == -1: break
 
-    for i in range(goal):
-        print("{}, prev = {}, cost = {}".format(i, prev[i], cost[i]))
+    print(path_count[goal] % 1000000007)
 
 if __name__ == '__main__':
     main()
