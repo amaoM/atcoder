@@ -22,10 +22,15 @@ def main():
     start = 0
     cost[start] = 0
 
-    for edge_from, from_nodes in enumerate(graph):
-        for edge_to, edge_cost in enumerate(from_nodes):
-            if cost[edge_to] != t and edge_cost > 0 and cost[edge_to] > cost[edge_from] + edge_cost:
-                cost[edge_to] = cost[edge_from] + edge_cost
+    def bellman_ford(graph, cost, prev):
+        for edge_from, from_nodes in enumerate(graph):
+            for edge_to, edge_cost in enumerate(from_nodes):
+                if cost[edge_to] != t and edge_cost > 0 and cost[edge_to] > cost[edge_from] + edge_cost:
+                    cost[edge_to] = cost[edge_from] + edge_cost
+                    prev[edge_to] = edge_from
+
+    cost, prev = bellman_ford(graph, cost, prev)
+    reverse_cost, reverse_prev = bellman_ford(reverse_graph, reverse_cost, reverse_prev)
 
 if __name__ == '__main__':
     main()
