@@ -13,12 +13,13 @@ class TestD(unittest.TestCase):
         th = [1, 3]
         graph = [
             [0, 2],
-            [1, ]
+            [1, 0]
         ]
         reverse_graph = [
             [0, 1],
             [2, 0]
         ]
+
         self.assertEqual(D.treasure_hant(n, m, t, th, graph, reverse_graph), 6)
 
     def test_D_2(self):
@@ -28,12 +29,13 @@ class TestD(unittest.TestCase):
         th = [1, 3]
         graph = [
             [0, 2],
-            [1, ]
+            [1, 0]
         ]
         reverse_graph = [
             [0, 1],
             [2, 0]
         ]
+
         self.assertEqual(D.treasure_hant(n, m, t, th, graph, reverse_graph), 3)
 
     def test_D_3(self):
@@ -61,4 +63,5 @@ class TestD(unittest.TestCase):
             [0, 0, 0, 1, 5, 0, 0, 0],
             [1, 0, 0, 0, 0, 17, 5, 0]
         ]
+
         self.assertEqual(D.treasure_hant(n, m, t, th, graph, reverse_graph), 1488)
