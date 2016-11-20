@@ -2,15 +2,16 @@
 
 def main():
     n, k = map(int, input().split())
-    a = input().split()
+    a = list(map(int, input().split()))
 
-    pa = [int(i) for i in a[:n - k + 1]]
-    res = sum(pa)
+    ta = sum([i for i in a[:n - k + 1]])
+    res = ta
+    l = 0
 
-    for b in a[n - k + 1:]:
-        pa.pop(0)
-        pa.append(int(b))
-        res += sum(pa)
+    for na in a[n - k + 1:]:
+        ta = ta - int(a[l]) + int(na)
+        res += ta
+        l += 1
 
     print(res)
 
