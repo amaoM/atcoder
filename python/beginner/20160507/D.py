@@ -9,8 +9,14 @@ def main():
 
     for sy, r in enumerate(graph):
         for sx, ta in enumerate(r):
+
+            if (sy, sx) in visited:
+                c += visited[(sy, sx)] - 1
+                continue
+
             queue = [([ta], sy, sx)]
             c += 1
+            
             while queue:
                 q = queue.pop(0)
                 prev = q[0]
@@ -18,9 +24,6 @@ def main():
                 y = q[1]
                 x = q[2]
 
-                if (y, x) in visited:
-                    c += visited[(y, x)]
-                    break
                 if h > y + 1 and graph[y + 1][x] > a:
                     queue.append((prev + [graph[y + 1][x]], y + 1, x))
                     c += 1
