@@ -3,11 +3,13 @@
 def main():
     h, w = map(int, input().split())
     graph = [list(map(int, input().split())) for _ in range(h)]
+    visited = {}
     c = 0
+    pc = 0
 
-    for y, r in enumerate(graph):
-        for x, ta in enumerate(r):
-            queue = [([ta], y, x)]
+    for sy, r in enumerate(graph):
+        for sx, ta in enumerate(r):
+            queue = [([ta], sy, sx)]
             c += 1
             while queue:
                 q = queue.pop(0)
@@ -16,6 +18,9 @@ def main():
                 y = q[1]
                 x = q[2]
 
+                if (y, x) in visited:
+                    c += visited[(y, x)]
+                    break
                 if h > y + 1 and graph[y + 1][x] > a:
                     queue.append((prev + [graph[y + 1][x]], y + 1, x))
                     c += 1
@@ -28,8 +33,9 @@ def main():
                 if x > 0 and graph[y][x - 1] > a:
                     queue.append((prev + [graph[y][x - 1]], y, x - 1))
                     c += 1
-                print(prev)
-    print(c)
+            visited[(sy, sx)] = c - pc
+            pc = c
+    print(c % (10 ** 9 + 7))
 
 if __name__ == '__main__':
     main()
