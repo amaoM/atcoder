@@ -1,15 +1,10 @@
 # coding: utf-8;
 
 def main():
-    l = ['Do', 'Re', 'Mi', 'Fa', 'So', 'Ra', 'Si']
     s = input()
-    k = 'WW'
-    i = s.find(k)
-    j = s.find(k, i + 1)
-    if j - i == 7:
-        print(l[4 - i])
-    else:
-        print(l[4 + i])
+    k = 'WBWBWWBWBWBW' * 3
+    m = ["Do","Do","Re","Re","Mi","Fa","Fa","So","So","La","La","Si"]
+    print(m[k.find(s)])
 
 if __name__ == '__main__':
     main()
