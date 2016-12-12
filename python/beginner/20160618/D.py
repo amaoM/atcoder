@@ -10,6 +10,7 @@ def dp(n, g, a, w, ps, c):
             ps.append((b, a))
             dp(n, g, b, w, ps, c)
     return ps
+
 def main():
     n, m = map(int, input().split())
     g = [[0 for _ in range(n)] for _ in range(n)]
@@ -21,12 +22,15 @@ def main():
 
     q = int(input())
     res = [[] for _ in range(q)]
+
     for i in range(q):
         v, w = map(int, input().split())
-        res[i] = [v]
+        res[i] = [v - 1]
         ps = dp(n, g, v - 1, w, [], 1)
+
         for p in ps:
             res[i] += list(p)
+
     for i in range(q):
         print(len(set(res[i])))
 
